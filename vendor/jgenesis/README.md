@@ -1,3 +1,5 @@
+> **Uso no Emmu:** este diretório é um **subset vendorizado** do JGenesis em `crates/emmu-pce/vendor/jgenesis`, usado apenas para PC Engine/TurboGrafx-16 (HuCard). Upstream: `jsgroth/jgenesis`, commit `8d1bdfba460b3a49b493aa00368926ea375d6074`. Foram mantidos `backend/pce-core`, `cpu/huc6280-emu`, `common/jgenesis-common`, `common/jgenesis-proc-macros`, `common/dsp`, um `common/cdrom` reduzido e `config/pce-config`. O módulo `cdrom` virou uma API mínima porque o Emmu não carrega discos. Manifestos foram expandidos, `[lints] workspace = true` removido e `cargo fmt` aplicado; a lógica de CPU/VDC/VCE/PSG não foi alterada. Licença: **GPL-3.0-only** (ver `LICENSE` e `../../UPSTREAM.txt`).
+
 # jgenesis
 
 Cross-platform multi-console emulator supporting a number of 8-bit and 16-bit gaming consoles.
@@ -49,7 +51,7 @@ Note that these builds are not always well-tested and may have bugs.
 
 ## Build & Run
 
-See [BUILD.md](BUILD.md)
+See [BUILD.md](https://github.com/jsgroth/jgenesis/blob/master/BUILD.md)
 
 ## License
 
