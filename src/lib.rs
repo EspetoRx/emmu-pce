@@ -70,9 +70,11 @@ fn default_config() -> PceEmulatorConfig {
         psg_volume_adjustment_db: 0.0,
         cd_da_volume_adjustment_db: 0.0,
         adpcm_volume_adjustment_db: 0.0,
-        // Gamepad de 6 botões mantém compatibilidade com I/II e expõe
-        // III/IV/V/VI para os botões X/Y/L/R do frontend.
-        input_device: PceInputDevice::SixButtonGamepad,
+        // PC Engine/TurboGrafx-16 usa gamepad de 2 botões (I/II). O modo de 6
+        // botões alterna o estado do controle a cada transição de CLR e a
+        // maioria dos jogos faz isso várias vezes por segundo; quando o estado
+        // extra está ativo, as setas não são lidas e o movimento fica travado.
+        input_device: PceInputDevice::TwoButtonGamepad,
         turbo_tap_connected: [false; pce_config::TURBO_TAP_GAMEPADS as usize],
         turbo_tap_gamepad_types: [PceGamepadType::TwoButton;
             pce_config::TURBO_TAP_GAMEPADS as usize],
@@ -461,6 +463,16 @@ mod tests {
         rom[0xFFFE] = 0x00;
         rom[0xFFFF] = 0xFF;
         rom
+    }
+
+    #[test]
+    fn default_pad_is_two_button() {
+        // O gamepad de 6 botões alterna o estado extra nas transições de CLR;
+        // jogos que fazem isso frequentemente deixam as setas sem leitura.
+        assert_eq!(
+            default_config().input_device,
+            PceInputDevice::TwoButtonGamepad
+        );
     }
 
     #[test]
