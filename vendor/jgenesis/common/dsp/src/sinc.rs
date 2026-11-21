@@ -684,6 +684,7 @@ mod tests {
     }
 
     // Validates that sum_wing_avx2() and sum_wing_avx512() produce the same results as sum_wing_no_avx()
+    #[cfg(target_arch = "x86_64")]
     fn sum_wing_test<Kernel: SincKernel>(
         source_rate: f64,
         sum_wing_avx_fn: impl Fn(bool, &[f32], u64, u64, [&[f64]; 1], usize) -> [f64; 1],
@@ -762,8 +763,6 @@ mod tests {
         }
     }
 
-    const TEST_SOURCE_RATES: &[f64] = &[4000000.0, 55000.0, 48000.0, 20000.0];
-
     // These tests should ideally be run using miri to verify no out-of-bounds memory reads:
     //   $ cargo +nightly miri test -p dsp
     #[cfg(target_arch = "x86_64")]
@@ -774,7 +773,7 @@ mod tests {
             return;
         }
 
-        for &source_rate in TEST_SOURCE_RATES {
+        for &source_rate in &[4000000.0, 55000.0, 48000.0, 20000.0] {
             let sum_wing_fn = |reverse,
                                fir: &[f32],
                                interpolation_idx,
@@ -805,7 +804,7 @@ mod tests {
             return;
         }
 
-        for &source_rate in TEST_SOURCE_RATES {
+        for &source_rate in &[4000000.0, 55000.0, 48000.0, 20000.0] {
             let sum_wing_fn = |reverse,
                                fir: &[f32],
                                interpolation_idx,
