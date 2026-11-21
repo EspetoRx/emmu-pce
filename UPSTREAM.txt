@@ -1,0 +1,31 @@
+Core de emulação vendorizado em `vendor/jgenesis`
+=================================================
+
+Upstream: https://github.com/jsgroth/jgenesis
+Commit: 8d1bdfba460b3a49b493aa00368926ea375d6074 (master em 2026-11-20)
+Licença: GPL-3.0 (ver LICENSE)
+
+Arquivos mantidos (subset necessário ao PC Engine):
+- backend/pce-core/
+- cpu/huc6280-emu/
+- common/jgenesis-common/
+- common/jgenesis-proc-macros/
+- common/dsp/
+- common/cdrom/ (versão reduzida, ver abaixo)
+- config/pce-config/
+
+Modificações locais:
+- `common/cdrom`: o leitor original (CUE/BIN e CHD, com dependências nativas
+  `chd`/`zstd` via `cc`) foi substituído por uma API mínima que mantém os tipos
+  usados por `pce-core` (`CdTime`, `CueSheet`, `Track`, `CdRom`, `CdRomError`).
+  O Emmu suporta apenas HuCard (`.pce`), portanto nenhum disco é carregado.
+- Manifestos Cargo: `version = { workspace = true }` e dependências de workspace
+  foram expandidas para valores literais, para que os crates compitem como
+  dependências de caminho dentro do workspace do Emmu.
+- `[lints] workspace = true` foi removido dos manifestos vendorizados.
+- `cargo fmt` foi aplicado a todo o workspace, inclusive ao subset vendorizado,
+  para que `cargo fmt --check` passe sem exigir rustfmt noturno (a opção
+  `ignore` do rustfmt.toml é instável no canal stable).
+
+Nenhuma lógica de emulação de CPU, VDC, VCE ou PSG foi alterada — apenas
+formatação, manifestos e o stub de `cdrom`.

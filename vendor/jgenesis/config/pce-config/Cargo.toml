@@ -1,0 +1,18 @@
+[package]
+name = "pce-config"
+version = "0.15.0"
+edition = "2024"
+license = "GPL-3.0-only"
+
+[features]
+default = []
+clap = ["dep:clap"]
+serde = ["dep:serde"]
+
+[dependencies]
+jgenesis-common = { path = "../../common/jgenesis-common" }
+jgenesis-proc-macros = { path = "../../common/jgenesis-proc-macros" }
+
+bincode = "2"
+clap = { version = "4", optional = true }
+serde = { version = "1", optional = true }

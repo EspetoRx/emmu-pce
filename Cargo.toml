@@ -1,0 +1,24 @@
+[package]
+name = "emmu-pce"
+version = "0.1.0"
+edition = "2024"
+description = "Emmu PC Engine / TurboGrafx-16 core (WASM + native)"
+license = "GPL-3.0-only"
+repository = "https://github.com/EspetoRx/emmu-pce"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+# O core de emulação (JGenesis pce-core + HuC6280 + utilitários) é vendorizado
+# dentro desta pasta, em `vendor/jgenesis`. Nenhum pacote de emulação fica fora
+# do diretório do módulo.
+[dependencies]
+pce-core = { path = "vendor/jgenesis/backend/pce-core" }
+jgenesis-common = { path = "vendor/jgenesis/common/jgenesis-common" }
+pce-config = { path = "vendor/jgenesis/config/pce-config" }
+bincode = "2"
+wasm-bindgen = "0.2"
+
+# `rand` é usado pelo core para inicializar RAM; no navegador o RNG precisa da
+# API JS do getrandom.
+getrandom = { version = "0.4", features = ["wasm_js"] }

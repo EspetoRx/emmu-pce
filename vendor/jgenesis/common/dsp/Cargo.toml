@@ -1,0 +1,13 @@
+[package]
+name = "dsp"
+version = "0.15.0"
+edition = "2024"
+license = "GPL-3.0-only"
+
+[dependencies]
+bincode = "2"
+log = "0.4"
+num = "0.4"
+
+[dev-dependencies]
+rand = "0.10"

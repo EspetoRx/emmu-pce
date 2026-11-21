@@ -1,0 +1,47 @@
+# Workspace reduzido do JGenesis, vendorizado para o core PCE do Emmu.
+# Apenas os crates necessários ao `pce-core` foram mantidos.
+[workspace]
+members = [
+    "backend/pce-core",
+    "common/cdrom",
+    "common/dsp",
+    "common/jgenesis-common",
+    "common/jgenesis-proc-macros",
+    "config/pce-config",
+    "cpu/huc6280-emu",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.15.0"
+edition = "2024"
+
+[workspace.dependencies]
+bincode = "2"
+bytemuck = { version = "1", features = ["derive"] }
+clap = "4"
+crc = "3"
+js-sys = "0.3"
+log = "0.4"
+multiversion = "0.9"
+num = "0.4"
+proc-macro2 = "1"
+quote = "1"
+rand = "0.10"
+rustc-hash = "2"
+serde = { version = "1", features = ["derive"] }
+syn = { version = "3", features = ["full"] }
+test-log = "0.2"
+thiserror = "2"
+time = "0.3"
+toml = "1"
+
+cdrom = { path = "common/cdrom" }
+dsp = { path = "common/dsp" }
+jgenesis-common = { path = "common/jgenesis-common" }
+jgenesis-proc-macros = { path = "common/jgenesis-proc-macros" }
+huc6280-emu = { path = "cpu/huc6280-emu" }
+pce-config = { path = "config/pce-config" }
+
+[workspace.lints.rust]
+rust_2018_idioms = "warn"

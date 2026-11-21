@@ -1,0 +1,9 @@
+[package]
+name = "cdrom"
+version = "0.15.0"
+edition = "2024"
+license = "GPL-3.0-only"
+
+[dependencies]
+bincode = { version = "2", features = ["derive"] }
+jgenesis-proc-macros = { path = "../jgenesis-proc-macros" }

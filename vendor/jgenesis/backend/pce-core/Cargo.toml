@@ -1,0 +1,18 @@
+[package]
+name = "pce-core"
+version = "0.15.0"
+edition = "2024"
+license = "GPL-3.0-only"
+
+[dependencies]
+cdrom = { path = "../../common/cdrom" }
+dsp = { path = "../../common/dsp" }
+jgenesis-common = { path = "../../common/jgenesis-common" }
+jgenesis-proc-macros = { path = "../../common/jgenesis-proc-macros" }
+huc6280-emu = { path = "../../cpu/huc6280-emu" }
+pce-config = { path = "../../config/pce-config" }
+
+bincode = "2"
+crc = "3"
+log = "0.4"
+thiserror = "2"
